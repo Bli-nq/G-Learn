@@ -13,7 +13,7 @@ class Subject(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
 
     class Meta:
-        ordering = ('title',)
+        ordering = ['title']
 
     def __str__(self):
         return self.title
@@ -30,7 +30,7 @@ class Course(models.Model):
     created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ('-created',)
+        ordering = ['-created']
 
     def __str__(self):
         return self.title
@@ -38,7 +38,7 @@ class Course(models.Model):
 
 class Module(models.Model):
     course = models.ForeignKey(
-        Course, related_name='module', on_delete=models.CASCADE)
+        Course, related_name='modules', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     order = OrderField(blank=True, for_fields=['course'])
@@ -47,7 +47,8 @@ class Module(models.Model):
         ordering = ['order']
 
     def __str__(self):
-        return '{}. {}'.format(self.order, self.title)
+        return f'{self.order}. {self.title}'
+    
 
 
 class Content(models.Model):

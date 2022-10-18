@@ -27,10 +27,15 @@
     <div id="content">
         {% block content %}
         {% endblock content %} 
+
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    {% block include_js %}
+    
+    {% endblock %}
+    {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script> {% endcomment %}
     <script>
-        $(document).ready(function(){
+        document.addEventListener('DOMContentLoaded', (event) => {
+        
             {% block domready %}{% endblock %}
         })
     </script>
